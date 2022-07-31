@@ -23,6 +23,7 @@ import '@/permission' // permission control
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
+// mock 假数据
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
@@ -39,5 +40,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 })

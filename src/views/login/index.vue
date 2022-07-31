@@ -1,10 +1,16 @@
 <template>
   <div class="login-container">
     <div class="login">
-      <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
+      <el-form
+        ref="loginForm"
+        :model="loginForm"
+        :rules="loginRules"
+        class="login-form"
+        auto-complete="on"
+        label-position="left"
+      >
         <div class="title-container">
-          <img src="~@/assets/login_images/logo.png" alt="" class="logo">
+          <img src="~@/assets/login_images/logo.png" alt="" class="logo" />
         </div>
 
         <el-form-item prop="username">
@@ -38,7 +44,9 @@
             @keyup.enter.native="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+            <svg-icon
+              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+            />
           </span>
         </el-form-item>
 
@@ -56,12 +64,17 @@
             auto-complete="on"
           />
           <div class="authimg">
-            <img src="@/assets/login_images/authimg.jpeg" alt="">
+            <img src="@/assets/login_images/authimg.jpeg" alt="" />
           </div>
         </el-form-item>
 
-        <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
-
+        <el-button
+          :loading="loading"
+          type="primary"
+          style="width: 100%; margin-bottom: 30px"
+          @click.native.prevent="handleLogin"
+          >登录</el-button
+        >
       </el-form>
     </div>
   </div>
@@ -91,24 +104,28 @@ export default {
       loginForm: {
         username: 'admin',
         password: '111111',
-        authcode: ''
+        authcode: '',
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        username: [
+          { required: true, trigger: 'blur', validator: validateUsername },
+        ],
+        password: [
+          { required: true, trigger: 'blur', validator: validatePassword },
+        ],
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
     }
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     showPwd() {
@@ -122,22 +139,25 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
+          this.$store
+            .dispatch('user/login', this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || '/' })
+              this.loading = false
+            })
+            .catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -145,8 +165,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
+$bg: #283443;
+$light_gray: #fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -157,7 +177,7 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
-      background: url('~@/assets/login_images/background.png') no-repeat 0 0 / cover;
+  background: url('~@/assets/login_images/background.png') no-repeat 0 0 / cover;
 
   .el-form-item__content {
     display: flex;
@@ -194,9 +214,9 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   display: flex;
@@ -228,7 +248,7 @@ $light_gray:#eee;
   .el-button {
     width: 448px;
     height: 52px;
-    background: linear-gradient(262deg,#2e50e1,#6878f0);
+    background: linear-gradient(262deg, #2e50e1, #6878f0);
   }
 
   .login-form {
@@ -263,7 +283,7 @@ $light_gray:#eee;
     position: absolute;
     top: -50px;
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
     width: 96px;
     height: 96px;
     .logo {
