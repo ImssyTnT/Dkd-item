@@ -188,7 +188,6 @@ $cursor: #fff;
     border: 1px solid #e2e2e2;
     background: #fff;
     border-radius: 5px;
-    // color: #454545;
     color: #454545;
   }
 }
