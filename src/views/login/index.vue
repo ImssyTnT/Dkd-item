@@ -144,10 +144,6 @@ export default {
         // 发起登录请求
         await this.login(this.loginForm)
         // 提示信息
-        this.$message({
-          type: this.message === '登录成功' ? 'success' : 'error',
-          message: this.message,
-        })
         // 提示信息展示后退出加载状态
         this.loading = false
         if (this.token) {
@@ -157,7 +153,7 @@ export default {
     },
   },
   computed: {
-    ...mapLoginState(['img', 'imgCode', 'message', 'token']),
+    ...mapLoginState(['img', 'imgCode', 'token']),
   },
 }
 </script>

@@ -5,7 +5,6 @@ export default {
   state: {
     imgCode: '',
     img: '',
-    message: '',
     token: '',
   },
   mutations: {
@@ -19,8 +18,7 @@ export default {
     },
     // 设置请求返回信息和token
     setLogin(state, payload) {
-      state.message = payload.msg
-      state.token = payload.token
+      state.token = payload
     },
   },
   actions: {
@@ -28,12 +26,11 @@ export default {
     async getImg(context) {
       try {
         const code = Math.floor(Math.random(0, 10) * 10)
-        const res = await getImg(code)
-        console.log(res)
-        // this.imgUrl = window.URL.createObjectURL(res.data)
         context.commit('setImgCode', code)
+        const res = await getImg(code)
+        // this.imgUrl = window.URL.createObjectURL(res.data)
         // const url = window.URL.createObjectURL(res.data)
-        context.commit('setImg', res.request.responseURL)
+        context.commit('setImg', res)
       } catch (error) {
         console.dir(error)
       }
@@ -42,7 +39,7 @@ export default {
     async login(context, payload) {
       try {
         const res = await login(payload)
-        context.commit('setLogin', res.data)
+        context.commit('setLogin', res.token)
       } catch (error) {}
     },
   },
