@@ -8,7 +8,7 @@ import request from '@/utils/request'
 export const getImg = (code) => {
   return request({
     method: 'GET',
-    url: `/api/user-service/user/imageCode/${code}`,
+    url: `/user-service/user/imageCode/${code}`,
   })
 }
 
@@ -20,7 +20,7 @@ export const getImg = (code) => {
 export const login = (data) => {
   return request({
     method: 'POST',
-    url: '/api/user-service/user/login',
+    url: '/user-service/user/login',
     data,
   })
 }

@@ -30,9 +30,13 @@ export default {
         const code = Math.floor(Math.random(0, 10) * 10)
         const res = await getImg(code)
         console.log(res)
+        // this.imgUrl = window.URL.createObjectURL(res.data)
         context.commit('setImgCode', code)
+        // const url = window.URL.createObjectURL(res.data)
         context.commit('setImg', res.request.responseURL)
-      } catch (error) {}
+      } catch (error) {
+        console.dir(error)
+      }
     },
     // 登录功能
     async login(context, payload) {
