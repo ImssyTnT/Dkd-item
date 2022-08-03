@@ -5,9 +5,10 @@ const whiteList = ['/login', '/404']
 
 // 全局路由前置守卫
 router.beforeEach((to, from, next) => {
-  const token = store.state.login.token
+  const token = store.state.user.token
   // 判断用户是否登录
   if (token) {
+    store.dispatch('user/getUserInfo', store.state.user.userId)
     //   登录
     //   如果要前往login页面 强制跳转回主页
     if (to.path === '/login') return next('/')

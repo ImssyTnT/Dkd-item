@@ -1,18 +1,16 @@
 <template>
   <div class="navbar">
-    <!-- <hamburger
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    /> -->
-    <!-- <breadcrumb class="breadcrumb-container" /> -->
     <img src="@/assets/home_images/logo.png" alt="" width="88" />
 
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
-          <div class="menu-text">欢迎您,</div>
+          <img
+            :src="userInfo.image"
+            class="user-avatar"
+            v-imgError="defaultImg"
+          />
+          <div class="menu-text">欢迎您,{{ userInfo.userName }}</div>
           <span>退出</span>
           <i class="el-icon-caret-bottom" />
         </div>
@@ -42,22 +40,31 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, createNamespacedHelpers } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import errorImg from '@/assets/home_images/下载.png'
+const { mapState: mapUserState } = createNamespacedHelpers('user')
 
 export default {
+  data() {
+    return {
+      defaultImg: errorImg,
+    }
+  },
   components: {
     Breadcrumb,
     Hamburger,
   },
   computed: {
     ...mapGetters(['sidebar', 'avatar']),
+    ...mapUserState(['userInfo']),
   },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
+    // 退出按钮
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)

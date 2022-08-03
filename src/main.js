@@ -12,6 +12,8 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+import * as directives from './directive'
+
 import '@/icons' // icon
 import '@/permission' // permission control
 
@@ -27,6 +29,10 @@ import '@/permission' // permission control
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
+}
+
+for (let k in directives) {
+  Vue.directive(k, directives[k])
 }
 
 // set ElementUI lang to EN
