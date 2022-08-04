@@ -54,7 +54,9 @@
     }
 
     .svg-icon {
+      font-size: 16px;
       margin-right: 16px;
+      vertical-align: middle;
     }
 
     .sub-el-icon {
@@ -77,14 +79,15 @@
     }
 
     .is-active > .el-submenu__title {
-      color: $subMenuActiveText !important;
+      color: rgb(95, 132, 255) !important;
     }
 
     & .nest-menu .el-submenu > .el-submenu__title,
     & .el-submenu .el-menu-item {
+      display: flex;
+      align-items: center;
       min-width: $sideBarWidth !important;
       background-color: #fff !important;
-
       // &:hover {
       //   background-color: $subMenuHover !important;
       // }
@@ -198,6 +201,7 @@
 
   .nest-menu .el-submenu > .el-submenu__title,
   .el-menu-item {
+    display: flex;
     &:hover {
       // you can use $subMenuHover
       background-color: $menuHover !important;
